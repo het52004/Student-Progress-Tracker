@@ -15,7 +15,8 @@ export const generateToken = (payload, res) => {
       maxAge: 24 * 60 * 60 * 1000,
     });
   } catch (error) {
-    console.log("Token error");
+    console.log("Token error", error.message);
+    return res.json({ success: false, message: "Error in generating token!" });
   }
 };
 

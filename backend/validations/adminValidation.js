@@ -19,3 +19,16 @@ export const adminSignupValidation = z.object({
       message: "Email must end with @gmail.com.",
     }),
 });
+
+export const adminLoginValidation = z.object({
+  adminEmail: z
+    .string()
+    .email({ message: "Invalid email format." })
+    .refine((email) => email.endsWith("@gmail.com"), {
+      message: "Email must end with @gmail.com.",
+    }),
+  adminPassword: z
+    .string()
+    .min(4, { message: "Password must be at least 4 characters long." })
+    .max(15, { message: "Password must be at most 15 characters long." }),
+});

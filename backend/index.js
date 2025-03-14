@@ -2,6 +2,7 @@ import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 import adminAuthentication from "./routes/adminAuthentication.routes.js";
+import educatorAuthentication from "./routes/educatorAuthentication.routes.js"
 import dotenv from "dotenv";
 import connectDb from "./Database/connectDb.js";
 import cookieParser from "cookie-parser";
@@ -19,6 +20,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
 app.use("/api/adminAuth", adminAuthentication);
+app.use("/api/educatorAuth", educatorAuthentication);
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/dist", "index.html"));
