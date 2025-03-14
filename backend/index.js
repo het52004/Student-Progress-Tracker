@@ -1,9 +1,10 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-import authenticationRoutes from "./routes/authentication.routes.js";
+import adminAuthentication from "./routes/adminAuthentication.routes.js";
 import dotenv from "dotenv";
 import connectDb from "./Database/connectDb.js";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
@@ -13,9 +14,11 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+app.use(cookieParser());
+app.use(express.json());
 app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
-app.use("/api/auth", authenticationRoutes);
+app.use("/api/adminAuth", adminAuthentication);
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/dist", "index.html"));
